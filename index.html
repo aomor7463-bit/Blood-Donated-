@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<script>
-  atOptions = {
-    'key' : 'b8a27153b7f197bceb4bf99ca35a2ba6',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/b8a27153b7f197bceb4bf99ca35a2ba6/invoke.js"></script>
-
-<script src="https://www.highperformanceformat.com/00cab1da630dc6b9feb24822d5fee914/invoke.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>মাদারগঞ্জ ব্লাড ডোনার সোসাইটি</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
     <style>
-        /* গ্লোবাল স্টাইল */
         * {
             margin: 0;
             padding: 0;
@@ -31,7 +21,6 @@
             color: #2c3e50;
         }
 
-        /* আধুনিক টপ বার ও হ্যামবার্গার মেনু */
         header {
             background-color: #ffffff;
             height: 70px;
@@ -81,7 +70,6 @@
             transition: all 0.3s ease;
         }
 
-        /* স্লাইড মেনু বার */
         .side-menu {
             position: fixed;
             top: 0;
@@ -139,7 +127,6 @@
             display: block;
         }
 
-        /* কন্টেন্ট বক্স */
         .container {
             max-width: 850px;
             margin: 40px auto;
@@ -182,7 +169,6 @@
             border-radius: 2px;
         }
 
-        /* ফর্ম গ্রিড লেআউট */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -195,7 +181,6 @@
             }
         }
 
-        /* হোমপেজের বিশেষ ডিজাইন */
         .hero-banner {
             background: linear-gradient(135deg, #ffefe6 0%, #ffdfdf 100%);
             padding: 30px;
@@ -315,7 +300,6 @@
             color: #555;
         }
 
-        /* প্রতিষ্ঠাতা কার্ড স্টাইল */
         .founder-card {
             display: flex;
             align-items: center;
@@ -366,7 +350,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.01);
         }
 
-        /* প্রফেশনাল A4 সাইজ ফর্ম স্টাইল */
         .a4-form-container {
             display: none;
             width: 100%;
@@ -459,7 +442,6 @@
             background-color: #27ae60;
         }
 
-        /* সার্চ রেজাল্ট নেভিগেশন */
         .search-nav {
             display: flex;
             justify-content: space-between;
@@ -757,7 +739,7 @@
                 <p>বহুদিনের একটি স্বপ্ন ছিল—একদিন মানুষের সেবার জন্য একটি স্বেচ্ছাসেবী সংগঠন গড়ে তুলব। কিন্তু সাহস, অভিজ্ঞতা আর নানা দুশ্চিন্তার কারণে বারবার পিছিয়ে গিয়েছি। অনেক চিন্তা, পরিকল্পনা এবং আল্লাহর ওপর ভরসা রেখে অবশেষে গত রাতে আমার সেই ছোট্ট স্বপ্নের যাত্রা শুরু হলো।</p>
                 <p style="font-weight: bold; color: #e74c3c; margin: 10px 0;">Madargonj Blood Donor Society, Pirgonj Rangpur ❤️🩸</p>
                 <p>এটি শুধু একটি সংগঠন নয়; এটি মানুষের পাশে দাঁড়ানোর, জীবন বাঁচানোর এবং মানবতার সেবায় নিজেকে উৎসর্গ করার একটি ক্ষুদ্র প্রচেষ্টা।</p>
-                <p>আমি জানি, এই পথ সহজ নয়। তবুও মহান আল্লাহর সাহায্য, আপনাদের দোয়া, পরামর্শ ও সহযোগিতা নিয়ে ইনশাআল্লাহ সামনে এগিয়ে যেতে চাই।</p>
+                <p>আমি জানি, এই পথ সহজ নয়। তবুও মহান আল্লাহর সাহায্য, আপনাদের দোয়া, পরামর্শ ও সহযোগিতা নিয়ে ইন شاء আল্লাহ সামনে এগিয়ে যেতে চাই।</p>
                 <p>আপনাদের সকলের কাছে আন্তরিক দোয়ার আবেদন—আল্লাহ যেন আমার এই ছোট্ট উদ্যোগকে কবুল করেন, এটিকে মানুষের কল্যাণের মাধ্যম বানিয়ে দেন এবং আমাদের সবাইকে একান্তভাবে তাঁর সন্তুষ্টির জন্য কাজ করার তাওফীক দান করেন। আমীন। 🤲</p>
                 <p style="font-weight: 600; margin-top: 15px; color: #2c3e50; text-align: center;">"মানুষের সেবাই হোক আমাদের অঙ্গীকার, রক্তদানের মাধ্যমে বাঁচুক অসংখ্য প্রাণ।" ❤️</p>
             </div>
@@ -766,6 +748,19 @@
     </div>
 
     <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyABNl-z1-x4dmJfNHoZVQHqRE5XnRHeB10",
+            authDomain: "omor-7f5b7.firebaseapp.com",
+            databaseURL: "https://omor-7f5b7-default-rtdb.firebaseio.com",
+            projectId: "omor-7f5b7",
+            storageBucket: "omor-7f5b7.firebasestorage.app",
+            messagingSenderId: "170819945184",
+            appId: "1:170819945184:web:c81d2df8f5630199e44685"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
         const districts = [
             "কক্সবাজার", "কিশোরগঞ্জ", "কুড়িগ্রাম", "কুষ্টিয়া", "কুমিল্লা", "খাগড়াছড়ি", "খুলনা", "গাইবান্ধা", 
             "গাজীপুর", "গোপালগঞ্জ", "চট্টগ্রাম", "চাঁদপুর", "চাঁপাইনবাবগঞ্জ", "চুয়াডাঙ্গা", "জয়পুরহাট", "জামালপুর", 
@@ -774,12 +769,20 @@
             "পিরোজপুর", "ফریدপুর", "ফেণী", "বগুড়া", "বরগুনা", "বরিশাল", "বাগেরহাট", "বান্দরবান", "ব্রাহ্মণবাড়িয়া", 
             "ভোলা", "ময়মনসিংহ", "মাগুরা", "মাদারীপুর", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "মেহেরপুর", "মৌলভীবাজার", 
             "যশোর", "রংপুর", "রাঙ্গমাটি", "রাজবাড়ী", "রাজশাহী", "লক্ষ্মীপুর", "লালমনিরহাট", "শরীয়তপুর", 
-            "শেরপুর", "সাতক্ষীরা", "সাভার (ঢাকা)", "সিরাজগঞ্জ", "সিলেট", "সুনামগঞ্জ", "হбиগঞ্জ"
+            "শেরপুর", "সাতক্ষيرة", "সাভার (ঢাকা)", "সিরাজগঞ্জ", "সিলেট", "সুনামগঞ্জ", "হবিগঞ্জ"
         ];
 
-        // বৈশ্বিক ভেরিয়েবল (সার্চ রেজাল্ট নিয়ন্ত্রণের জন্য)
         let currentDonors = [];
         let currentDonorIndex = 0;
+
+        // Map section names to beautiful URL friendly slug paths
+        const sectionPaths = {
+            'home': '',
+            'register': 'bloodreg',
+            'search': 'bloodfound',
+            'benefits': 'benefits',
+            'about': 'aboutus'
+        };
 
         window.onload = function() {
             const dropdowns = document.querySelectorAll('.district-select');
@@ -792,6 +795,26 @@
                 });
             });
             document.getElementById('printDate').innerText = new Date().toLocaleDateString('bn-BD');
+
+            // Detect slug from URL path
+            const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
+            let targetSection = 'home';
+            
+            for (const [sectionId, slug] of Object.entries(sectionPaths)) {
+                if (currentPath === slug && slug !== '') {
+                    targetSection = sectionId;
+                    break;
+                }
+            }
+            loadSectionWithoutHistory(targetSection);
+        };
+
+        window.onpopstate = function(event) {
+            if (event.state && event.state.sectionId) {
+                loadSectionWithoutHistory(event.state.sectionId);
+            } else {
+                loadSectionWithoutHistory('home');
+            }
         };
 
         function toggleMenu() {
@@ -802,25 +825,38 @@
         }
 
         function showSection(sectionId) {
+            loadSectionWithoutHistory(sectionId);
+            
+            // Generate clean routing URL paths matching Vercel Single Page App rules
+            const slug = sectionPaths[sectionId];
+            const newUrl = window.location.protocol + "//" + window.location.host + "/" + slug;
+            
+            window.history.pushState({sectionId: sectionId}, '', newUrl);
+            toggleMenu();
+        }
+
+        function loadSectionWithoutHistory(sectionId) {
             const sections = document.querySelectorAll('.page-section');
             sections.forEach(section => section.classList.remove('active-section'));
 
             const navLinks = document.querySelectorAll('.side-menu ul li a');
             navLinks.forEach(link => link.classList.remove('active'));
 
-            document.getElementById(sectionId).classList.add('active-section');
-            document.getElementById('nav-' + sectionId).classList.add('active');
+            const activeSection = document.getElementById(sectionId);
+            const activeNav = document.getElementById('nav-' + sectionId);
+
+            if (activeSection) activeSection.classList.add('active-section');
+            if (activeNav) activeNav.classList.add('active');
 
             if(sectionId !== 'search') {
                 document.getElementById('a4Form').style.display = 'none';
             }
-
-            toggleMenu();
         }
 
-        // সংশোধিত ডাটা সেভ ফাংশন (যা ডাটা হারিয়ে যাওয়া রোধ করবে)
         function saveDonorData(e) {
             e.preventDefault();
+            const upazilaInput = document.getElementById('regUpazila').value.trim();
+            
             const donor = {
                 name: document.getElementById('regName').value,
                 group: document.getElementById('regGroup').value,
@@ -830,65 +866,64 @@
                 weight: document.getElementById('regWeight').value,
                 phone: document.getElementById('regPhone').value,
                 district: document.getElementById('regDistrict').value,
-                upazila: document.getElementById('regUpazila').value.trim().toLowerCase(),
-                upazilaRaw: document.getElementById('regUpazila').value,
+                upazila: upazilaInput.toLowerCase(),
+                upazilaRaw: upazilaInput,
                 address: document.getElementById('regAddress').value
             };
 
-            const uniqueKey = 'donor_' + donor.group + '_' + donor.district + '_' + donor.upazila;
+            const pathNode = 'donors/' + donor.group + '/' + donor.district + '/' + donor.upazila;
             
-            // আগের ডাটা থাকলে তা তুলে আনা, না থাকলে নতুন অ্যারে তৈরি
-            let donorList = JSON.parse(localStorage.getItem(uniqueKey)) || [];
-            
-            // নতুন রক্তদাতাকে তালিকায় পুশ করা
-            donorList.push(donor);
-            
-            // আপডেট করা তালিকাটি পুনরায় সেভ করা
-            localStorage.setItem(uniqueKey, JSON.stringify(donorList));
-            
-            alert('মাদারগঞ্জ ব্লাড ডোনার সোসাইটিতে রক্তদাতা হিসেবে আপনার নিবন্ধন সফলভাবে সম্পন্ন হয়েছে!');
-            document.getElementById('regForm').reset();
+            database.ref(pathNode).push(donor)
+                .then(() => {
+                    alert('মাকারগঞ্জ ব্লাড ডোনার সোসাইটিতে রক্তদাতা হিসেবে আপনার নিবন্ধন সফলভাবে সম্পন্ন হয়েছে এবং ডাটাবেজে সংরক্ষিত হয়েছে!');
+                    document.getElementById('regForm').reset();
+                })
+                .catch((error) => {
+                    alert('ত্রুটি: তথ্য সংরক্ষণ করা যায়নি। ' + error.message);
+                });
         }
 
-        // সংশোধিত সার্চ ফাংশন
         function searchDonorData(e) {
             e.preventDefault();
             const sGroup = document.getElementById('searchGroup').value;
             const sDistrict = document.getElementById('searchDistrict').value;
             const sUpazila = document.getElementById('searchUpazila').value.trim().toLowerCase();
 
-            const uniqueKey = 'donor_' + sGroup + '_' + sDistrict + '_' + sUpazila;
-            const localData = localStorage.getItem(uniqueKey);
+            const pathNode = 'donors/' + sGroup + '/' + sDistrict + '/' + sUpazila;
 
-            if (localData) {
-                currentDonors = JSON.parse(localData);
-                
-                if (currentDonors.length > 0) {
-                    currentDonorIndex = 0;
-                    displayDonorInfo(currentDonorIndex);
-                    document.getElementById('a4Form').style.display = 'block';
-                    
-                    // একাধিক ডোনার থাকলে নেভিগেশন বার দেখাবে
-                    if (currentDonors.length > 1) {
-                        document.getElementById('searchNav').style.display = 'flex';
+            database.ref(pathNode).once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        currentDonors = Object.values(data);
+                        
+                        if (currentDonors.length > 0) {
+                            currentDonorIndex = 0;
+                            displayDonorInfo(currentDonorIndex);
+                            document.getElementById('a4Form').style.display = 'block';
+                            
+                            if (currentDonors.length > 1) {
+                                document.getElementById('searchNav').style.display = 'flex';
+                            } else {
+                                document.getElementById('searchNav').style.display = 'none';
+                            }
+                        } else {
+                            alert('দুঃখিত, কোনো রক্তদাতার তথ্য পাওয়া যায়নি।');
+                            document.getElementById('a4Form').style.display = 'none';
+                        }
                     } else {
+                        alert('দুঃখিত, এই গ্রুপ, জেলা এবং থানার কোনো রক্তদাতার তথ্য আপাদত পাওয়া যায়নি।');
+                        document.getElementById('a4Form').style.display = 'none';
                         document.getElementById('searchNav').style.display = 'none';
                     }
-                } else {
-                    alert('দুঃখিত, কোনো রক্তদাতার তথ্য পাওয়া যায়নি।');
-                    document.getElementById('a4Form').style.display = 'none';
-                }
-            } else {
-                alert('দুঃখিত, এই গ্রুপ, জেলা এবং থানার কোনো রক্তদাতার তথ্য আপাতত পাওয়া যায়নি। সঠিক বানানে থানাটি লিখে পুনরায় চেষ্টা করুন।');
-                document.getElementById('a4Form').style.display = 'none';
-                document.getElementById('searchNav').style.display = 'none';
-            }
+                })
+                .catch((error) => {
+                    alert('সার্চ করার সময় সমস্যা হয়েছে: ' + error.message);
+                });
         }
 
-        // নির্দিষ্ট ইনডেক্সের রক্তদাতার তথ্য দেখানোর ফাংশন
         function displayDonorInfo(index) {
             const donor = currentDonors[index];
-            
             document.getElementById('fName').innerText = donor.name;
             document.getElementById('fGroup').innerText = donor.group;
             document.getElementById('fFather').innerText = donor.father;
@@ -899,11 +934,9 @@
             document.getElementById('fUpazila').innerText = donor.upazilaRaw;
             document.getElementById('fAddress').innerText = donor.address;
 
-            // কাউন্টার আপডেট (যেমন: রক্তদাতা: ১/৩)
             document.getElementById('donorCount').innerText = "রক্তদাতা: " + (index + 1) + "/" + currentDonors.length;
         }
 
-        // পরবর্তী রক্তদাতার তথ্য দেখা
         function nextDonor() {
             if (currentDonorIndex < currentDonors.length - 1) {
                 currentDonorIndex++;
@@ -913,7 +946,6 @@
             }
         }
 
-        // পূর্ববর্তী রক্তদাতার তথ্য দেখা
         function prevDonor() {
             if (currentDonorIndex > 0) {
                 currentDonorIndex--;
@@ -923,7 +955,5 @@
             }
         }
     </script>
-<script src="https://pl29840351.effectivecpmnetwork.com/0c/e9/c0/0ce9c0cfaa45be098852e284428f7711.js"></script>
-
 </body>
-</html> 
+</html>
