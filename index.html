@@ -3,350 +3,435 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রক্তদান - জীবন বাঁচান (Blood Donation)</title>
-    
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script> 
-    
-    <script>
-        // আপনার ফায়ারবেস কনফিগারেশন
-        const firebaseConfig = {
-            apiKey: "AIzaSyBHB1X2gBLXn0tOKSthoCbguGGkp0bYOFc", 
-            authDomain: "tournament-26471.firebaseapp.com",
-            databaseURL: "https://tournament-26471-default-rtdb.firebaseio.com",
-            projectId: "tournament-26471",
-            storageBucket: "tournament-26471.firebasestorage.app",
-            messagingSenderId: "142722670959",
-            appId: "1:142722670959:web:9422b045479f22bf0f489a",
-            measurementId: "G-HJVTWJXJGT"
-        };
-        
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database(); 
-    </script>
-    
+    <title>রক্তদান ওয়েবসাইট (Blood Donation)</title>
     <style>
-        :root {
-            --primary-color: #dc3545;
-            --secondary-color: #28a745;
-            --dark-color: #333;
-            --light-color: #f8f9fa;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* গ্লোবাল স্টাইল */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
-            color: var(--dark-color);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
-        
-        /* ফিক্সড হেডার ও থ্রি-ডট মেনু */
-        .navbar {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
+
+        body {
+            background-color: #fafafa;
+            color: #2c3e50;
+        }
+
+        /* আধুনিক টপ বার ও হ্যামবার্গার মেনু */
+        header {
+            background-color: #ffffff;
+            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        /* ৩টি দাগ ওয়ালা বাটন (Hamburger Icon) */
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-btn span {
+            width: 100%;
+            height: 3px;
+            background-color: #e74c3c;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* স্লাইড মেনু বার */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            padding-top: 90px;
+            transition: right 0.4s ease;
+            z-index: 1000;
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .side-menu ul li a {
+            display: block;
+            padding: 15px 30px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        .side-menu ul li a:hover, .side-menu ul li a.active {
+            color: #e74c3c;
+            background-color: #fdf2f2;
+            border-left: 4px solid #e74c3c;
+        }
+
+        /* মেনু ওপেন হলে ব্যাকগ্রাউন্ড আবছা করার জন্য */
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            box-sizing: border-box;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .navbar h1 { margin: 0; font-size: 22px; }
-        
-        .menu-icon {
-            font-size: 28px;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        /* সাইড নেভিগেশন মেনু */
-        .sidenav {
             height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1001;
-            top: 0;
-            right: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.4s;
-            padding-top: 60px;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.4);
+            display: none;
+            z-index: 999;
         }
-        
-        .sidenav a {
-            padding: 12px 25px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #ccc;
+
+        .overlay.show {
             display: block;
-            transition: 0.3s;
-            border-bottom: 1px solid #222;
-        }
-        
-        .sidenav a:hover { color: white; background-color: var(--primary-color); }
-        
-        .sidenav .closebtn {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            font-size: 36px;
-            color: #fff;
         }
 
-        /* মেইন কন্টেইনার মার্জিন (হেডারের জন্য) */
-        .main-container {
-            max-width: 900px;
-            margin: 90px auto 30px auto;
-            padding: 0 15px;
-        }
-        
-        /* কার্ড স্টাইল */
-        .card {
+        /* কন্টেন্ট বক্স */
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 30px;
             background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            border-top: 4px solid var(--primary-color);
-        }
-        
-        .card h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            font-size: 22px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
-        .info-list { padding-left: 20px; }
-        .info-list li { margin-bottom: 10px; }
-        
-        /* ফর্ম এলিমেন্ট */
-        label { display: block; margin-top: 12px; font-weight: bold; color: #555; }
-        input, select { width: 100%; padding: 12px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
-        input:focus, select:focus { border-color: var(--primary-color); outline: none; }
-        
-        button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 15px; font-weight: bold; transition: 0.3s; }
-        button:hover { background-color: #bd2130; }
-        .btn-search { background-color: var(--secondary-color); }
-        .btn-search:hover { background-color: #218838; }
-        
-        /* টেবিল স্টাইল */
-        .result-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px; }
-        .result-table th, .result-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        .result-table th { background-color: var(--primary-color); color: white; }
-        .result-table tr:nth-child(even) { background-color: #f9f9f9; }
-        .call-btn { display: inline-block; background-color: var(--secondary-color); color: white; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 14px; }
-        .no-data { text-align: center; color: #888; font-weight: bold; padding: 20px; }
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active-section {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #e74c3c;
+            border-radius: 2px;
+        }
+
+        /* হোমপেজের বিশেষ ডিজাইন */
+        .hero-banner {
+            background: linear-gradient(135deg, #ffefe6 0%, #ffdfdf 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #e74c3c;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .hero-banner h3 {
+            color: #c0392b;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .hero-banner p {
+            font-size: 18px;
+            font-weight: 500;
+            color: #34495e;
+            line-height: 1.6;
+        }
+
+        .benefit-card {
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .benefit-card h4 {
+            color: #e74c3c;
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ইনপুট ফিল্ড ও বাটন স্টাইল */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9f9f9;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #e74c3c;
+            background-color: #fff;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        .info-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <h1>🩸 Blood Link</h1>
-        <span class="menu-icon" onclick="openNav()">☰</span>
-    </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="#home_section" onclick="closeNav()">🏠 হোম পেজ</a>
-        <a href="#search_section" onclick="closeNav()">🔍 ডোনার খুঁজুন</a>
-        <a href="#register_section" onclick="closeNav()">🤝 ডোনার রেজিস্ট্রেশন</a>
-    </div>
-
-    <div class="main-container">
-        
-        <div class="card" id="home_section">
-            <h2>🏠 রক্তদান সম্পর্কিত জরুরি তথ্য</h2>
-            
-            <h3>❓ কারা রক্ত দিতে পারবেন?</h3>
-            <ul class="info-list">
-                <li><strong>বয়স:</strong> ১৮ থেকে ৬০ বছর বয়সী যেকোনো সুস্থ মানুষ রক্ত দিতে পারবেন।</li>
-                <li><strong>ওজন:</strong> পুরুষদের ক্ষেত্রে ন্যূনতম ৫০ কেজি এবং নারীদের ক্ষেত্রে ন্যূনতম ৪৫ কেজি ওজন হতে হবে।</li>
-                <li><strong>হিমোগ্লোবিন:</strong> রক্তে হিমোগ্লোবিনের মাত্রা সঠিক থাকতে হবে (ন্যূনতম ১২.৫)।</li>
-                <li><strong>সময়সীমা:</strong> শেষ রক্তদানের পর পুরুষদের ক্ষেত্রে কমপক্ষে ৩ মাস এবং নারীদের ক্ষেত্রে ৪ মাস পার হতে হবে।</li>
-                <li><strong>শারীরিক সুস্থতা:</strong> রক্তদাতার কোনো জটিল রোগ (যেমন: জন্ডিস, এইডস, হেপাটাইটিস) থাকা যাবে না।</li>
-            </ul>
-
-            <h3>✨ রক্ত দিলে কী উপকার হয়?</h3>
-            <ul class="info-list">
-                <li><strong>হৃদরোগের ঝুঁকি কমায়:</strong> নিয়মিত রক্তদানে শরীরে অতিরিক্ত আয়রনের মাত্রা কমে, যা হৃদরোগ ও স্ট্রোকের ঝুঁকি হ্রাস করে।</li>
-                <li><strong>নতুন রক্তকণিকা তৈরি:</strong> রক্ত দেওয়ার পর শরীরের বোন ম্যারো বা অস্থিমজ্জা নতুন রক্তকণিকা তৈরিতে উদ্বুদ্ধ হয়, ফলে শরীর আরও সতেজ হয়।</li>
-                <li><strong>ক্যান্সারের ঝুঁকি হ্রাস:</strong> গবেষণায় দেখা গেছে, নিয়মিত রক্ত দিলে কিছু নির্দিষ্ট ক্যান্সারের ঝুঁকি কমে যায়।</li>
-                <li><strong>বিনামূল্যে স্বাস্থ্য পরীক্ষা:</strong> রক্ত দেওয়ার সময় হেপাটাইটিস-বি, সি, এইডস, সিফিলিস এবং ম্যালেরিয়ার মতো ৫টি মারাত্মক রোগের পরীক্ষা বিনামূল্যে হয়ে যায়।</li>
-                <li><strong>মানসিক তৃপ্তি:</strong> সবচেয়ে বড় বিষয়, আপনার সামান্য রক্ত একজন মুমূর্ষু মানুষের জীবন বাঁচাতে পারে, যা এক অতুলনীয় মানসিক শান্তি দেয়।</li>
-            </ul>
+    <header>
+        <div class="logo">রক্তদান</div>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        
-        <div class="card" id="search_section">
-            <h2>🔍 রক্তদাতার সন্ধান করুন (Search Donor)</h2>
-            <form onsubmit="searchDonors(event)">
-                <label for="search_blood">রক্তের গ্রুপ নির্বাচন করুন:</label>
-                <select id="search_blood" required>
-                    <option value="">-- রক্তের গ্রুপ --</option>
-                    <option value="A+">A+ (এ পজিティブ)</option>
-                    <option value="A-">A- (এ নেгеটিভ)</option>
-                    <option value="B+">B+ (বি পজিティブ)</option>
-                    <option value="B-">B- (বি নেগেটিভ)</option>
-                    <option value="O+">O+ (ও পজিティブ)</option>
-                    <option value="O-">O- (ও নেগেটিভ)</option>
-                    <option value="AB+">AB+ (এবি পজিティブ)</option>
-                    <option value="AB-">AB- (এবি নেগেটিভ)</option>
-                </select>
+    </header>
 
-                <label for="search_location">এলাকা/জেলা/উপজেলা লিখুন:</label>
-                <input type="text" id="search_location" placeholder="যেমন: Rangpur বা Hasanpur" required>
+    <div class="overlay" onclick="toggleMenu()"></div>
 
-                <button type="submit" class="btn-search">🔎 ডোনার খুঁজুন</button>
-            </form>
+    <nav class="side-menu" id="sideMenu">
+        <ul>
+            <li><a onclick="showSection('home')" id="nav-home" class="active">হোমপেজ</a></li>
+            <li><a onclick="showSection('register')" id="nav-register">রক্তদাতা নিবন্ধন</a></li>
+            <li><a onclick="showSection('search')" id="nav-search">রক্ত খুঁজুন</a></li>
+            <li><a onclick="showSection('about')" id="nav-about">আমাদের সম্পর্কে</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div id="home" class="page-section active-section">
+            <div class="hero-banner">
+                <h3>একটি মানবিক আহ্বান</h3>
+                <p>"আমাদের এক ফোঁটা রক্তই বেঁচে যেতে পারে কারো সন্তান, কারো ছেলে, কিংবা কারো আপনজন।"</p>
+            </div>
+
+            <h2>রক্তদানের প্রয়োজনীয় তথ্য ও উপকারিতা</h2>
             
-            <div id="searchResultsArea"></div>
+            <div class="benefit-card">
+                <h4>🩸 জীবন বাঁচানোর আনন্দ</h4>
+                <p class="info-text">আপনার সামান্য রক্তদানের মাধ্যমে একটি মুমূর্ষু মানুষের জীবন ফিরে পাওয়া সম্ভব। এর চেয়ে বড় মানসিক তৃপ্তি আর কিছু হতে পারে না।</p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>❤️ হৃদরোগের ঝুঁকি হ্রাস</h4>
+                <p class="info-text">নিয়মিত রক্তদান করলে শরীরে আয়রনের ভারসাম্য বজায় থাকে, যা রক্তদাতার হৃদরোগ এবং হার্ট অ্যাটাকের ঝুঁকি অনেকাংশে কমিয়ে দেয়।</p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>🔄 নতুন রক্তকণিকা তৈরি</h4>
+                <p class="info-text">রক্ত দেওয়ার পর শরীরের অস্থিমজ্জা নতুন রক্তকণিকা তৈরির জন্য উদ্দীপ্ত হয়। ফলে শরীরে দ্রুত নতুন এবং সুস্থ রক্তকণিকা তৈরি হয়।</p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>🩺 বিনামূল্যে স্বাস্থ্য পরীক্ষা</h4>
+                <p class="info-text">রক্তদানের পূর্বে প্রত্যেক রক্তদাতার রক্তচাপ, পালস, হিমোগ্লোবিনের মাত্রা এবং বেশ কিছু মারাত্মক রোগ সম্পূর্ণ বিনামূল্যে পরীক্ষা করা হয়।</p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>📅 রক্তদানের সময়সীমা</h4>
+                <p class="info-text">১৮ থেকে ৬০ বছর বয়সী যেকোনো সুস্থ মানুষ, যার ওজন ৪৫ কেজির ওপরে, তিনি প্রতি ৪ মাস পর পর নিরাপদেই রক্তদান করতে পারেন।</p>
+            </div>
         </div>
 
-        <div class="card" id="register_section">
-            <h2>🤝 রক্তদাতা হিসেবে নাম রেজিস্টার করুন</h2>
-            <form onsubmit="registerDonor(event)">
-                <label for="donor_name">আপনার সম্পূর্ণ নাম:</label>
-                <input type="text" id="donor_name" placeholder="যেমন: আরিফুল ইসলাম" required>
-
-                <label for="donor_blood">আপনার রক্তের গ্রুপ:</label>
-                <select id="donor_blood" required>
-                    <option value="">-- রক্তের গ্রুপ নির্বাচন করুন --</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                </select>
-
-                <label for="donor_phone">মোবাইল নম্বর:</label>
-                <input type="tel" id="donor_phone" placeholder="যেমন: 017XXXXXXXX" required>
-
-                <label for="donor_location">আপনার বর্তমান ঠিকানা/এলাকা:</label>
-                <input type="text" id="donor_location" placeholder="যেমন: Hasanpur, Rangpur" required>
-
-                <label for="last_donate">সর্বশেষ রক্তদানের তারিখ (ঐচ্ছিক):</label>
-                <input type="date" id="last_donate">
-
-                <button type="submit">📤 ডোনার লিস্টে নাম যুক্ত করুন</button>
+        <div id="register" class="page-section">
+            <h2>রক্তদাতা হিসেবে নিবন্ধন করুন</h2>
+            <form onsubmit="event.preventDefault(); alert('তথ্য সফলভাবে জমা হয়েছে!');">
+                <div class="form-group">
+                    <label>আপনার নাম:</label>
+                    <input type="text" placeholder="এখানে নাম লিখুন" required>
+                </div>
+                <div class="form-group">
+                    <label>রক্তের গ্রুপ:</label>
+                    <select required>
+                        <option value="">নির্বাচন করুন</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>মোবাইল নম্বর:</label>
+                    <input type="tel" placeholder="এখানে মোবাইল নম্বর লিখুন" required>
+                </div>
+                <div class="form-group">
+                    <label>জেলা নির্বাচন করুন:</label>
+                    <select class="district-select" required>
+                        <option value="">জেলা সিলেক্ট করুন</option>
+                    </select>
+                </div>
+                <button type="submit">নিবন্ধন সম্পন্ন করুন</button>
             </form>
         </div>
 
+        <div id="search" class="page-section">
+            <h2>রক্তদাতার সন্ধান করুন</h2>
+            <form onsubmit="event.preventDefault(); alert('অনুসন্ধান করা হচ্ছে...');">
+                <div class="form-group">
+                    <label>রক্তের গ্রুপ:</label>
+                    <select required>
+                        <option value="">রক্তের গ্রুপ বেছে নিন</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>জেলা নির্বাচন করুন:</label>
+                    <select class="district-select" required>
+                        <option value="">জেলা সিলেক্ট করুন</option>
+                    </select>
+                </div>
+                <button type="submit">অনুসন্ধান করুন</button>
+            </form>
+        </div>
+
+        <div id="about" class="page-section">
+            <h2>আমাদের সম্পর্কে</h2>
+            <p class="info-text">এখানে আপনার সংগঠন বা আপনার ওয়েবসাইট সম্পর্কিত বিস্তারিত তথ্য বা ডেসক্রিপশন লিখে দিতে পারেন।</p>
+        </div>
+
     </div>
 
-<script>
-    // --- মেনু কন্ট্রোল ফাংশন ---
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "260px";
-    }
+    <script>
+        // বাংলাদেশের ৬৪টি জেলার তালিকা
+        const districts = [
+            "কক্সবাজার", "কিশোরগঞ্জ", "কুড়িগ্রাম", "কুষ্টিয়া", "কুমিল্লা", "খাগড়াছড়ি", "খুলনা", "গাইবান্ধা", 
+            "গাজীপুর", "গোপালগঞ্জ", "চট্টগ্রাম", "চাঁদপুর", "চাঁপাইনবাবগঞ্জ", "চুয়াডাঙ্গা", "জয়পুরহাট", "জামালপুর", 
+            "ঝালকাঠি", "ঝিনাইদহ", "টাঙ্গাইল", "ঠাকুরগাঁও", "ঢাকা", "দিনাজপুর", "নওগাঁ", "নড়াইল", "নরসিংদী", 
+            "নাটোর", "নারায়ণগঞ্জ", "নীলফামারী", "নেত্রকোনা", "নোয়াখালী", "পাবনা", "পঞ্চগড়", "পটুয়াখালী", 
+            "পিরোজপুর", "ফریدপুর", "ফেণী", "বগুড়া", "বরগুনা", "বরিশাল", "বাগেরহাট", "বান্দরবান", "ব্রাহ্মণবাড়িয়া", 
+            "ভোলা", "ময়মনসিংহ", "মাগুরা", "মাদারীপুর", "মানিকগঞ্জ", "মুन्সীগঞ্জ", "মেহেরপুর", "مৌলভীবাজার", 
+            "যশোর", "রংপুর", "রাঙ্গামাটি", "রাজবাড়ী", "রাজশাহী", "লক্ষ্মীপুর", "লালমনিরহাট", "শরীয়তপুর", 
+            "শেরপুর", "সাতক্ষীরা", "সাভার (ঢাকা)", "সিরাজগঞ্জ", "সিলেট", "সুনামগঞ্জ", "হবিগঞ্জ"
+        ];
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-
-    // --- ডোনার রেজিস্ট্রেশন ফাংশন ---
-    function registerDonor(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('donor_name').value.trim();
-        const blood = document.getElementById('donor_blood').value;
-        const phone = document.getElementById('donor_phone').value.trim();
-        const location = document.getElementById('donor_location').value.trim().toLowerCase();
-        const lastDonate = document.getElementById('last_donate').value || "জানানো হয়নি";
-
-        database.ref('donors').push({
-            name: name,
-            blood_group: blood,
-            phone: phone,
-            location: location,
-            last_donation_date: lastDonate
-        })
-        .then(() => {
-            alert("✅ অভিনন্দন! রক্তদাতা হিসেবে আপনার নাম সফলভাবে রেজিস্টার হয়েছে।");
-            e.target.reset();
-        })
-        .catch(err => {
-            alert("❌ ত্রুটি: " + err.message);
-        });
-    }
-
-    // --- ডোনার সার্চ ফাংশন ---
-    function searchDonors(e) {
-        e.preventDefault();
-        
-        const targetBlood = document.getElementById('search_blood').value;
-        const targetLocation = document.getElementById('search_location').value.trim().toLowerCase();
-        const resultArea = document.getElementById('searchResultsArea');
-        
-        resultArea.innerHTML = `<p style="color: var(--primary-color); font-weight: bold; text-align: center;">ডোনার খোঁজা হচ্ছে...</p>`;
-
-        database.ref('donors').orderByChild('blood_group').equalTo(targetBlood).once('value')
-        .then(snapshot => {
-            if (snapshot.exists()) {
-                let tableRows = '';
-                let foundMatch = false;
-
-                snapshot.forEach(childSnapshot => {
-                    const donor = childSnapshot.val();
-                    
-                    if (donor.location.includes(targetLocation)) {
-                        foundMatch = true;
-                        tableRows += `
-                            <tr>
-                                <td><strong>${donor.name}</strong></td>
-                                <td style="color: red; font-weight: bold; text-align:center;">${donor.blood_group}</td>
-                                <td>${donor.location.toUpperCase()}</td>
-                                <td>${donor.last_donation_date}</td>
-                                <td><a href="tel:${donor.phone}" class="call-btn">📞 কল করুন</a></td>
-                            </tr>
-                        `;
-                    }
+        // জেলা ড্রপডাউনে যুক্ত করার ফাংশন
+        window.onload = function() {
+            const dropdowns = document.querySelectorAll('.district-select');
+            dropdowns.forEach(select => {
+                districts.forEach(district => {
+                    let option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    select.appendChild(option);
                 });
+            });
+        };
 
-                if (foundMatch) {
-                    resultArea.innerHTML = `
-                        <h3 style="margin-top: 25px; color: var(--secondary-color);">🩸 উপযুক্ত রক্তদাতাদের তালিকা:</h3>
-                        <table class="result-table">
-                            <thead>
-                                <tr>
-                                    <th>নাম</th>
-                                    <th>গ্রুপ</th>
-                                    <th>এলাকা</th>
-                                    <th>শেষ রক্তদান</th>
-                                    <th>অ্যাকশন</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${tableRows}
-                            </tbody>
-                        </table>
-                    `;
-                } else {
-                    resultArea.innerHTML = `<p class="no-data">❌ দুঃখিত, এই এলাকায় "${targetBlood}" গ্রুপের কোনো ডোনার পাওয়া যায়নি।</p>`;
-                }
+        // মেনু খোলা এবং বন্ধ করার ফাংশন
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.querySelector('.overlay');
+            menu.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
 
-            } else {
-                resultArea.innerHTML = `<p class="no-data">❌ দুঃখিত, ডাটাবেজে "${targetBlood}" গ্রুপের কোনো ডোনার নিবন্ধিত নেই।</p>`;
-            }
-        })
-        .catch(err => {
-            resultArea.innerHTML = `<p class="no-data" style="color: red;">ত্রুটি: ${err.message}</p>`;
-        });
-    }
-</script>
+        // পেজ পরিবর্তন করার ফাংশন
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
+
+            const navLinks = document.querySelectorAll('.side-menu ul li a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active-section');
+            document.getElementById('nav-' + sectionId).classList.add('active');
+
+            toggleMenu();
+        }
+    </script>
 
 </body>
-</html>
+    </html>
