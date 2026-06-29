@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <script src="https://pl30122304.effectivecpmnetwork.com/2c/87/19/2c8719a8c6e0de0dfbfa3f68ea364b7a.js"></script>
+<script src="https://pl29840351.effectivecpmnetwork.com/0c/e9/c0/0ce9c0cfaa45be098852e284428f7711.js"></script>
+<script src="https://pl29633214.effectivecpmnetwork.com/97/a1/ac/97a1ac1b6cf13c0d13dcc14d796efccd.js"></script>
+<script src="https://pl30122220.effectivecpmnetwork.com/a0/1d/3e/a01d3e567131a412fe74bb97ef13406b.js"></script>
+<script src="https://pl30122304.effectivecpmnetwork.com/2c/87/19/2c8719a8c6e0de0dfbfa3f68ea364b7a.js"></script>
 
+<script src='//libtl.com/sdk.js' data-zone='10062644' data-sdk='show_10062644'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>মাদারগঞ্জ ব্লাড ডোনার সোসাইটি</title>
     
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <script src='//pl26145325.highperformanceformat.com/53/b7/db/53b7db2c451da7ebf38ee359d9f10928.js'></script>
 
     <style>
         * {
@@ -72,6 +78,16 @@
             transition: all 0.3s ease;
         }
 
+        /* ব্যানার বিজ্ঞাপনের স্টাইল */
+        .banner-ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0 5px 0;
+            background-color: #fafafa;
+        }
+
         .side-menu {
             position: fixed;
             top: 0;
@@ -131,7 +147,7 @@
 
         .container {
             max-width: 850px;
-            margin: 40px auto;
+            margin: 20px auto 40px auto;
             padding: 30px;
             background: white;
             border-radius: 12px;
@@ -485,6 +501,9 @@
             .print-btn, .search-nav {
                 display: none;
             }
+            .banner-ad-container {
+                display: none !important;
+            }
         }
 
         @media (max-width: 600px) {
@@ -508,6 +527,19 @@
             <span></span>
         </div>
     </header>
+
+    <div class="banner-ad-container">
+        <script>
+          atOptions = {
+            'key' : 'b8a27153b7f197bceb4bf99ca35a2ba6',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+          };
+        </script>
+        <script src="https://www.highperformanceformat.com/b8a27153b7f197bceb4bf99ca35a2ba6/invoke.js"></script>
+    </div>
 
     <div class="overlay" onclick="toggleMenu()"></div>
 
@@ -769,7 +801,7 @@
             "ঝালকাঠি", "ঝিনাইদহ", "টাঙ্গাইল", "ঠাকুরগাঁও", "ঢাকা", "দিনাজপুর", "নওগাঁ", "নড়াইল", "নরসিংদী", 
             "নাটোর", "নারায়ণগঞ্জ", "নীলফামারী", "নেত্রকোনা", "নোয়াখালী", "পাবনা", "পঞ্চগড়", "পটুয়াখালী", 
             "পিরোজপুর", "ফریدপুর", "ফেণী", "বগুড়া", "বরগুনা", "বরিশাল", "বাগেরহাট", "বান্দরবান", "ব্রাহ্মণবাড়িয়া", 
-            "ভোলা", "ময়মনসিংহ", "মাগুরা", "মাদারীপুর", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "মেহেরপুর", "মৌলভীবাজার", 
+            "ভোলা", "ময়মনসিংহ", "মাগুরা", "มাদারীপুর", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "মেহেরপুর", "মৌলভীবাজার", 
             "যশোর", "রংপুর", "রাঙ্গমাটি", "রাজবাড়ী", "রাজশাহী", "লক্ষ্মীপুর", "লালমনিরহাট", "শরীয়তপুর", 
             "শেরপুর", "সাতক্ষيرة", "সাভার (ঢাকা)", "সিরাজগঞ্জ", "সিলেট", "সুনামগঞ্জ", "হবিগঞ্জ"
         ];
@@ -777,7 +809,6 @@
         let currentDonors = [];
         let currentDonorIndex = 0;
 
-        // Map section names to beautiful URL friendly slug paths
         const sectionPaths = {
             'home': '',
             'register': 'bloodreg',
@@ -798,7 +829,6 @@
             });
             document.getElementById('printDate').innerText = new Date().toLocaleDateString('bn-BD');
 
-            // Detect slug from URL path
             const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
             let targetSection = 'home';
             
@@ -828,11 +858,8 @@
 
         function showSection(sectionId) {
             loadSectionWithoutHistory(sectionId);
-            
-            // Generate clean routing URL paths matching Vercel Single Page App rules
             const slug = sectionPaths[sectionId];
             const newUrl = window.location.protocol + "//" + window.location.host + "/" + slug;
-            
             window.history.pushState({sectionId: sectionId}, '', newUrl);
             toggleMenu();
         }
@@ -857,8 +884,8 @@
 
         function saveDonorData(e) {
             e.preventDefault();
-            const upazilaInput = document.getElementById('regUpazila').value.trim();
             
+            const upazilaInput = document.getElementById('regUpazila').value.trim();
             const donor = {
                 name: document.getElementById('regName').value,
                 group: document.getElementById('regGroup').value,
@@ -873,16 +900,28 @@
                 address: document.getElementById('regAddress').value
             };
 
-            const pathNode = 'donors/' + donor.group + '/' + donor.district + '/' + donor.upazila;
-            
-            database.ref(pathNode).push(donor)
-                .then(() => {
-                    alert('মাকারগঞ্জ ব্লাড ডোনার সোসাইটিতে রক্তদাতা হিসেবে আপনার নিবন্ধন সফলভাবে সম্পন্ন হয়েছে এবং ডাটাবেজে সংরক্ষিত হয়েছে!');
-                    document.getElementById('regForm').reset();
-                })
-                .catch((error) => {
-                    alert('ত্রুটি: তথ্য সংরক্ষণ করা যায়নি। ' + error.message);
+            const executeRegistration = () => {
+                const pathNode = 'donors/' + donor.group + '/' + donor.district + '/' + donor.upazila;
+                database.ref(pathNode).push(donor)
+                    .then(() => {
+                        alert('মাদারগঞ্জ ব্লাড ডোনার সোসাইটিতে রক্তদাতা হিসেবে আপনার নিবন্ধন সফলভাবে সম্পন্ন হয়েছে এবং ডাটাবেজে সংরক্ষিত হয়েছে!');
+                        document.getElementById('regForm').reset();
+                    })
+                    .catch((error) => {
+                        alert('ত্রুটি: তথ্য সংরক্ষণ করা যায়নি। ' + error.message);
+                    });
+            };
+
+            if (typeof show_10062644 === "function") {
+                show_10062644().then(() => {
+                    executeRegistration();
+                }).catch((err) => {
+                    console.log("Ad failed or skipped", err);
+                    executeRegistration();
                 });
+            } else {
+                executeRegistration();
+            }
         }
 
         function searchDonorData(e) {
@@ -891,37 +930,49 @@
             const sDistrict = document.getElementById('searchDistrict').value;
             const sUpazila = document.getElementById('searchUpazila').value.trim().toLowerCase();
 
-            const pathNode = 'donors/' + sGroup + '/' + sDistrict + '/' + sUpazila;
-
-            database.ref(pathNode).once('value')
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const data = snapshot.val();
-                        currentDonors = Object.values(data);
-                        
-                        if (currentDonors.length > 0) {
-                            currentDonorIndex = 0;
-                            displayDonorInfo(currentDonorIndex);
-                            document.getElementById('a4Form').style.display = 'block';
+            const executeSearch = () => {
+                const pathNode = 'donors/' + sGroup + '/' + sDistrict + '/' + sUpazila;
+                database.ref(pathNode).once('value')
+                    .then((snapshot) => {
+                        if (snapshot.exists()) {
+                            const data = snapshot.val();
+                            currentDonors = Object.values(data);
                             
-                            if (currentDonors.length > 1) {
-                                document.getElementById('searchNav').style.display = 'flex';
+                            if (currentDonors.length > 0) {
+                                currentDonorIndex = 0;
+                                displayDonorInfo(currentDonorIndex);
+                                document.getElementById('a4Form').style.display = 'block';
+                                
+                                if (currentDonors.length > 1) {
+                                    document.getElementById('searchNav').style.display = 'flex';
+                                } else {
+                                    document.getElementById('searchNav').style.display = 'none';
+                                }
                             } else {
-                                document.getElementById('searchNav').style.display = 'none';
+                                alert('দুঃখিত, কোনো রক্তদাতার তথ্য পাওয়া যায়নি।');
+                                document.getElementById('a4Form').style.display = 'none';
                             }
                         } else {
-                            alert('দুঃখিত, কোনো রক্তদাতার তথ্য পাওয়া যায়নি।');
+                            alert('দুঃখিত, এই গ্রুপ, জেলা এবং থানার কোনো রক্তদাতার তথ্য আপাদত পাওয়া যায়নি।');
                             document.getElementById('a4Form').style.display = 'none';
+                            document.getElementById('searchNav').style.display = 'none';
                         }
-                    } else {
-                        alert('দুঃখিত, এই গ্রুপ, জেলা এবং থানার কোনো রক্তদাতার তথ্য আপাদত পাওয়া যায়নি।');
-                        document.getElementById('a4Form').style.display = 'none';
-                        document.getElementById('searchNav').style.display = 'none';
-                    }
-                })
-                .catch((error) => {
-                    alert('সার্চ করার সময় সমস্যা হয়েছে: ' + error.message);
+                    })
+                    .catch((error) => {
+                        alert('সার্চ করার সময় সমস্যা হয়েছে: ' + error.message);
+                    });
+            };
+
+            if (typeof show_10062644 === "function") {
+                show_10062644().then(() => {
+                    executeSearch();
+                }).catch((err) => {
+                    console.log("Ad failed or skipped", err);
+                    executeSearch();
                 });
+            } else {
+                executeSearch();
+            }
         }
 
         function displayDonorInfo(index) {
@@ -957,8 +1008,9 @@
             }
         }
     </script>
-    <script src="https://pl29840351.effectivecpmnetwork.com/0c/e9/c0/0ce9c0cfaa45be098852e284428f7711.js"></script>
-    <script src="https://pl30122304.effectivecpmnetwork.com/2c/87/19/2c8719a8c6e0de0dfbfa3f68ea364b7a.js"></script>
+<script src="https://pl29840351.effectivecpmnetwork.com/0c/e9/c0/0ce9c0cfaa45be098852e284428f7711.js"></script>
+<script src="https://pl29633214.effectivecpmnetwork.com/97/a1/ac/97a1ac1b6cf13c0d13dcc14d796efccd.js"></script>
+<script src="https://pl30122220.effectivecpmnetwork.com/a0/1d/3e/a01d3e567131a412fe74bb97ef13406b.js"></script>
 <script src="https://pl30122304.effectivecpmnetwork.com/2c/87/19/2c8719a8c6e0de0dfbfa3f68ea364b7a.js"></script>
 
 </body>
